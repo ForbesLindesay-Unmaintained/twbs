@@ -8,7 +8,6 @@ var gethub = require('gethub');
 var mkdirp = require('mkdirp').sync;
 var rimraf = require('rimraf').sync;
 
-
 step('cleanup', function () {
   rimraf(__dirname + '/bootstrap');
 });
@@ -17,13 +16,17 @@ step('download', function () {
   return gethub('twbs', 'bootstrap', 'v3.0.3', __dirname + '/bootstrap');
 }, '60 seconds');
 
-
 step('copy less files', function () {
   rimraf(__dirname + '/less');
   mkdirp(__dirname + '/less');
   var files = fs.readdirSync(__dirname + '/bootstrap/less');
   for (var i = 0; i < files.length; i++) {
-    if (/\.less$/.test(files[i])) {
+    if (files[i] === 'glyphicons.less') {
+      var src = fs.readFileSync(__dirname + '/bootstrap/less/' + files[i], 'utf8');
+      // remove ~quotes from ~"url('@{icon-font-path}@{icon-font-name}.eot')"
+      src = src.replace(/~"([^\"]+)"/g, '$1');
+      fs.writeFileSync(__dirname + '/less/' + files[i], src);
+    } else if (/\.less$/.test(files[i])) {
       var src = fs.readFileSync(__dirname + '/bootstrap/less/' + files[i], 'utf8');
       fs.writeFileSync(__dirname + '/less/' + files[i], src);
     }
