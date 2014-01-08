@@ -45,7 +45,19 @@ step('copy js files', function () {
   for (var i = 0; i < files.length; i++) {
     if (/\.js$/.test(files[i])) {
       var src = fs.readFileSync(__dirname + '/bootstrap/js/' + files[i], 'utf8');
-      src = prefix + src;
+      var match;
+      var pattern = /\$\.fn\.([a-zA-Z]+)/g;
+      var dependencies = [];
+      while (match = pattern.exec(src)) {
+        if (dependencies.indexOf(match[1]) === -1 && match[1] !== files[i].replace(/\.js$/, ''))
+          dependencies.push(match[1]);
+      }
+      var deps = '';
+      dependencies.forEach(function (dep) {
+        if (fs.existsSync(__dirname + '/bootstrap/js/' + dep + '.js'))
+          deps += 'require("./' + dep + '.js");\n';
+      });
+      src = prefix + deps + src;
       fs.writeFileSync(__dirname + '/lib/' + files[i], src);
     }
   }
