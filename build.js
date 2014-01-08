@@ -10,6 +10,12 @@ var rimraf = require('rimraf').sync;
 
 step('cleanup', function () {
   rimraf(__dirname + '/bootstrap');
+  rimraf(__dirname + '/less');
+  rimraf(__dirname + '/lib');
+  rimraf(__dirname + '/fonts');
+  rimraf(__dirname + '/BOOTSTRAP-LICENSE');
+  rimraf(__dirname + '/index.js');
+  rimraf(__dirname + '/jquery.js');
 });
 
 step('download', function () {
@@ -17,7 +23,6 @@ step('download', function () {
 }, '60 seconds');
 
 step('copy less files', function () {
-  rimraf(__dirname + '/less');
   mkdirp(__dirname + '/less');
   var files = fs.readdirSync(__dirname + '/bootstrap/less');
   for (var i = 0; i < files.length; i++) {
@@ -34,9 +39,8 @@ step('copy less files', function () {
 });
 
 step('copy js files', function () {
-  rimraf(__dirname + '/lib');
   mkdirp(__dirname + '/lib');
-  var prefix = 'var jQuery = require("jquery");\nmodule.exports = jQuery;\n';
+  var prefix = 'var jQuery = require("../jquery");\nvar $ = jQuery;\nmodule.exports = jQuery;\n';
   var files = fs.readdirSync(__dirname + '/bootstrap/js');
   for (var i = 0; i < files.length; i++) {
     if (/\.js$/.test(files[i])) {
@@ -48,7 +52,6 @@ step('copy js files', function () {
 });
 
 step('copy js fonts', function () {
-  rimraf(__dirname + '/fonts');
   mkdirp(__dirname + '/fonts');
   var files = fs.readdirSync(__dirname + '/bootstrap/fonts');
   for (var i = 0; i < files.length; i++) {
@@ -61,7 +64,7 @@ step('create index.js', function () {
   var buf = [];
   buf.push('"use strict";');
   buf.push('');
-  buf.push('var jQuery = require("jquery");');
+  buf.push('var jQuery = require("./jquery");');
   buf.push('');
   buf.push('module.exports = jQuery');
   buf.push('');
@@ -73,6 +76,17 @@ step('create index.js', function () {
   }
   buf.push('');
   fs.writeFileSync(__dirname + '/index.js', buf.join('\n'));
+});
+
+step('create jquery.js', function () {
+  var buf = [];
+  buf.push('"use strict";');
+  buf.push('');
+  buf.push('var jQuery = require("jquery");');
+  buf.push('');
+  buf.push('module.exports = jQuery.fn ? jQuery : jQuery(window);');
+  buf.push('');
+  fs.writeFileSync(__dirname + '/jquery.js', buf.join('\n'));
 });
 
 step('copy LICENSE', function () {
