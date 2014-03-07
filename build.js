@@ -19,7 +19,9 @@ step('cleanup', function () {
 });
 
 step('download', function () {
-  return gethub('twbs', 'bootstrap', 'v3.0.3', __dirname + '/bootstrap');
+  return gethub('twbs', 'bootstrap',
+                'v' + require('./package.json')['bootstrap-version'],
+                __dirname + '/bootstrap');
 }, '60 seconds');
 
 step('copy less files', function () {

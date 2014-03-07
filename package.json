@@ -1,7 +1,12 @@
 {
   "name": "twbs",
   "style": "./less/bootstrap.less",
+<<<<<<< HEAD
   "version": "0.0.4",
+=======
+  "version": "0.0.2",
+  "bootstrap-version": "3.0.3",
+>>>>>>> docs etc.
   "description": "Twitter bootstrap with support for module systems",
   "keywords": [],
   "peerDependencies": {
