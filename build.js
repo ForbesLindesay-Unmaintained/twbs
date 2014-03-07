@@ -104,7 +104,7 @@ step('create jquery.js', function () {
 });
 
 step('copy LICENSE', function () {
-  var src = fs.readFileSync(__dirname + '/bootstrap/LICENSE-MIT', 'utf8');
+  var src = fs.readFileSync(__dirname + '/bootstrap/LICENSE', 'utf8');
   fs.writeFileSync(__dirname + '/BOOTSTRAP-LICENSE', src);
 });
 
