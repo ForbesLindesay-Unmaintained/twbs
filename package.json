@@ -2,7 +2,7 @@
   "name": "twbs",
   "style": "./less/bootstrap.less",
   "version": "0.0.2",
-  "bootstrap-version": "3.0.3",
+  "bootstrap-version": "3.1.1",
   "description": "Twitter bootstrap with support for module systems",
   "keywords": [],
   "peerDependencies": {
