@@ -3,8 +3,8 @@
 Twitter bootstrap with support for module systems
 
 [![Build Status](https://img.shields.io/travis/ForbesLindesay/twbs/master.svg)](https://travis-ci.org/ForbesLindesay/twbs)
-[![Dependency Status](https://img.shields.io/gemnasium/ForbesLindesay/twbs.svg)](https://gemnasium.com/ForbesLindesay/twbs)
-[![NPM version](https://img.shields.io/npm/v/twbs.svg)](http://badge.fury.io/js/twbs)
+[![Dependency Status](https://img.shields.io/david/ForbesLindesay/twbs.svg)](https://david-dm.org/ForbesLindesay/twbs)
+[![NPM version](https://img.shields.io/npm/v/twbs.svg)](https://www.npmjs.com/package/twbs)
 
 ## Installation
 
