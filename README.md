@@ -1,5 +1,7 @@
 # twbs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ForbesLindesay/twbs.svg)](https://greenkeeper.io/)
+
 Twitter bootstrap with support for module systems
 
 [![Build Status](https://img.shields.io/travis/ForbesLindesay/twbs/master.svg)](https://travis-ci.org/ForbesLindesay/twbs)
